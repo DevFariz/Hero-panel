@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {v4 as uuidv4} from "uuid";
-import { heroCreated } from "../../actions";
+import { heroCreated } from "../heroesList/heroesSlice";
 import {useHttp} from "../../hooks/http.hook";
 import Spinner from "../spinner/Spinner";
 
