@@ -1,25 +1,23 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {v4 as uuidv4} from "uuid";
-import { heroCreated } from "../heroesList/heroesSlice";
-import {useHttp} from "../../hooks/http.hook";
-import Spinner from "../spinner/Spinner";
+import {useHttp} from '../../hooks/http.hook';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
-const HeroesAddForm = () => {   
+import { heroCreated } from '../heroesList/heroesSlice';
+
+const HeroesAddForm = () => {
     const [heroName, setHeroName] = useState('');
     const [heroDescr, setHeroDescr] = useState('');
     const [heroElement, setHeroElement] = useState('');
 
-    const {request} = useHttp();
-
     const {filters, filtersLoadingStatus} = useSelector(state => state.filters);
     const dispatch = useDispatch();
+    const {request} = useHttp();
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-
         const newHero = {
-            id: uuidv4 (),
+            id: uuidv4(),
             name: heroName,
             description: heroDescr,
             element: heroElement
@@ -28,22 +26,21 @@ const HeroesAddForm = () => {
         request("http://localhost:3001/heroes", "POST", JSON.stringify(newHero))
             .then(dispatch(heroCreated(newHero)))
             .catch(err => console.log(err));
-        
+
         setHeroName('');
         setHeroDescr('');
         setHeroElement('');
     }
 
     const renderFilters = (filters, status) => {
-        if(status === 'loading'){
-            return <option><Spinner /></option>
-        } else if(status === 'error'){
+        if (status === "loading") {
+            return <option>Загрузка элементов</option>
+        } else if (status === "error") {
             return <option>Ошибка загрузки</option>
         }
-
+        
         if (filters && filters.length > 0 ) {
             return filters.map(({name, label}) => {
-                // Один из фильтров нам тут не нужен
                 // eslint-disable-next-line
                 if (name === 'all')  return;
 
@@ -60,11 +57,11 @@ const HeroesAddForm = () => {
                     required
                     type="text" 
                     name="name" 
-                    className="form-control"
-                    onChange={(e) => setHeroName(e.target.value)}
-                    value={heroName}
+                    className="form-control" 
                     id="name" 
-                    placeholder="Как меня зовут?"/>
+                    placeholder="Как меня зовут?"
+                    value={heroName}
+                    onChange={(e) => setHeroName(e.target.value)}/>
             </div>
 
             <div className="mb-3">
@@ -72,12 +69,12 @@ const HeroesAddForm = () => {
                 <textarea
                     required
                     name="text" 
-                    className="form-control"
-                    onChange={(e) => setHeroDescr(e.target.value)}
-                    value={heroDescr} 
+                    className="form-control" 
                     id="text" 
                     placeholder="Что я умею?"
-                    style={{"height": '130px'}}/>
+                    style={{"height": '130px'}}
+                    value={heroDescr}
+                    onChange={(e) => setHeroDescr(e.target.value)}/>
             </div>
 
             <div className="mb-3">
@@ -86,9 +83,10 @@ const HeroesAddForm = () => {
                     required
                     className="form-select" 
                     id="element" 
-                    onChange={(e) => setHeroElement(e.target.value)}
-                    name="element">
-                    <option>Я владею элементом...</option>
+                    name="element"
+                    value={heroElement}
+                    onChange={(e) => setHeroElement(e.target.value)}>
+                    <option value="">Я владею элементом...</option>
                     {renderFilters(filters, filtersLoadingStatus)}
                 </select>
             </div>

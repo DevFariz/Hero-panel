@@ -13,12 +13,6 @@
       "element": "wind"
     },
     {
-      "id": 3,
-      "name": "Морской герой",
-      "description": "Как аквамен, но не из DC",
-      "element": "water"
-    },
-    {
       "id": "2681c9c3-eab4-4a3b-a18d-f9c9cf83680c",
       "name": "fds",
       "description": "fsdsf",
@@ -28,6 +22,24 @@
       "id": "87c17a8f-6d7b-4e47-a51c-cf9a8c339f0d",
       "name": "dfs",
       "description": "dcs",
+      "element": "water"
+    },
+    {
+      "id": "4b740e7f-4494-440f-bef8-e8e64f7e933b",
+      "name": "f",
+      "description": "sfd",
+      "element": "wind"
+    },
+    {
+      "id": "55bf219d-158d-4589-8f01-ed6189e2ec79",
+      "name": "ewr",
+      "description": "ewr",
+      "element": "fire"
+    },
+    {
+      "id": "b2451737-8b63-425b-8278-df773cc5302c",
+      "name": "dsfd",
+      "description": "sfds",
       "element": "water"
     }
   ],
